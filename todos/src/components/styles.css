@@ -1,0 +1,45 @@
+.nav {
+    margin-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 80px;
+    padding-top: 20px;
+    height: 400px;
+}
+
+.nav a {
+    font-size: 22px;
+    float: left;
+}
+
+
+.p {
+     float: left;
+     padding-top: 20px;
+     padding-left: 40px;
+     color: var(--bs-primary);
+}
+
+.p2 {
+    color: var(--bs-primary);
+    padding-left: 40px;
+}
+
+.todocontainer {
+    float: left;
+    padding-top: 100px;
+
+}
+.todocontainer p {
+    font-size: 30px;
+}
+.link {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.link span{
+    text-decoration: none;
+    font-size: 35px;
+    color: var(--bs-primary);
+}
