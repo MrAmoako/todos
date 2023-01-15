@@ -1,57 +1,18 @@
 import React from 'react';
-import {db} from './firebase/firebase'; 
-import { useState, useEffect } from 'react';
-import { collection, doc, getDocs, deleteDoc } from 'firebase/firestore';
+import useFetch from '../useFetch';
+import { useEffect , useState } from 'react';
 import './styles.css';
+import TodosList from './todoslist';
 
 export default function Todos() {
+const { data, isPending, error } = useFetch('http://localhost:8000/todos');
 
-    const [todos, setTodos] = useState([]);
-
-    useEffect(() => {
-        getTodos()
-     }, [])
- 
-     useEffect(() => {
-         console.log(todos)
-      }, [todos])
-     
-   function getTodos() {
-    const todosCollectionRef = collection(db, 'todos');
-    getDocs(todosCollectionRef)
-    .then(response => {
-       const todo = response.docs.map(doc => ({
-        data: doc.data(),
-        id: doc.id,
-       }))
-       setTodos(todo)
-    })
-    .catch(error => console.log(error.message))
-
-   }
- 
-
-   function deleteTodos(id) {
-    const docRef = doc(db, 'todos', id)
-    deleteDoc(docRef).then(() => console.log('document deleted '))
-    .catch(error => console.log(error.message))
-
-   }
- 
   return (
-    <div>
-      
      <div className='todocontainer'>
-      {todos.map(todos => (
-        <div id={todos.id}>
-            <p><input class="form-check-input" onClick={() => deleteTodos(todos.id)} type="checkbox" value="" id="flexCheckDefault"></input>{todos.data.todo}</p>
-            
-        </div>
-        
-      ))}
-      <a href="/additem" class="link"><span>+</span>Add Item</a>
+      {error && <div>{ error }</div>}
+    {isPending && <div><p>Loading...</p></div>}
+     {data && <TodosList todos={data}/>}
+     <a href="/additem" className='link'><span>+</span>Add Item</a>
       </div>
-      
-    </div>
   )
 }

@@ -6,8 +6,7 @@ export default function Home() {
   return (
     <div>
         <p className="p fs-1">Index</p>
-        <Todos />
-       
+       <Todos />
     </div>
   )
 }

@@ -4,7 +4,6 @@ import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import Home from './components/Home';
 import AddItem from './components/AddItem';
-import SideBar from './components/SideBar';
 import './components/styles.css';
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
     <Router>
     <div className="App">
      <TopBar />
-     <SideBar />
      <div className='content'>
      <Routes>
         <Route path="/" element={<Home />} />
