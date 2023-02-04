@@ -1,27 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router , Route , Routes } from 'react-router-dom';
-import TopBar from './components/TopBar';
-import Home from './components/Home';
-import AddItem from './components/AddItem';
-import './components/styles.css';
+import React, { useState } from "react";
 
-function App() {
+import Form from "./components/form";
+import "./App.css";
+
+export default () => {
+  const [todos, setTodos] = useState([]);
+
+  const toggleComplete = i =>
+    setTodos(
+      todos.map(
+        (todo, k) =>
+          k === i
+            ? {
+                ...todo,
+                complete: !todo.complete
+              }
+            : todo
+      )
+    );
+
   return (
-    <Router>
-    <div className="App">
-     <TopBar />
-     <div className='content'>
-     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/additem" element={<AddItem />} />
-      </Routes>
-     </div>
     
+    <div className="App" class="float-start">
+      <h2>Todo</h2>
+      <Form
+        onSubmit={text => setTodos([{ text, complete: false }, ...todos])}
+      />
+      <div>
+        {todos.map(({ text, complete }, i) => (
+          <div
+            key={text}
+            onClick={() => toggleComplete(i)}
+            style={{
+              textDecoration: complete ? "line-through" : ""
+            }}
+          >
+            <p Class=" fs-1">{text}</p>
+          </div>
+        ))}
+      </div>
+      <button class="btn btn-light" onClick={() => setTodos([])}>reset</button>
+      
     </div>
-    
-    </Router>
   );
-}
- 
-export default App;
+};
